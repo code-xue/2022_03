@@ -9,7 +9,7 @@
 
 int my_strlen(char* str)
 {
-  assert(str);
+	assert(str);
 	int count = 0;
 	while (*str != '\0')
 	{
@@ -31,7 +31,7 @@ int main()
 
 int my_strlen(char* str)
 {
-  assert(str);
+	assert(str);
 	char* start = str;
 	while (*str != '\0')
 	{
@@ -52,7 +52,7 @@ int main()
 
 int my_strlen(char* str)
 {
-  assert(str);
+	assert(str);
 	if (*str != '\0')
 	{
 		str++;
@@ -80,7 +80,7 @@ char* my_strcpy(char* dest, const char* sce)
 {
 	assert(dest);
 	assert(sce);
-  char* ret = dest;
+	char* ret = dest;
 	int len = strlen(sce);
 	int i = 0;
 	for (i = 0; i <= len; i++) //strcpy也会将\0复制到目标字符串中
@@ -90,7 +90,7 @@ char* my_strcpy(char* dest, const char* sce)
 		dest++;
 		sce++;
 	}
-  return ret;
+	return ret;
 }
 
 int main()
@@ -98,7 +98,7 @@ int main()
 	char arr[] = { "abcd" };
 	char* p = "efg";
 	my_strcpy(arr, p);
-	printf("%s\n", arr); 
+	printf("%s\n", arr);
 	return 0;
 }
 
@@ -111,7 +111,7 @@ char* my_strncpy(char* dest, const char* sce, int k)
 	int i = 0;
 	for (i = 0; i < k; i++)
 	{
-		if(*sce != '\0')
+		if (*sce != '\0')
 		{
 			*dest++ = *sce++;
 		}
@@ -150,7 +150,7 @@ int main()
 	char arr[20] = { "abcd" };
 	char* p = "efg";
 	my_strncpy(arr, p, 5);//复制前2个字符到arr中
-	printf("%s\n", arr); 
+	printf("%s\n", arr);
 	return 0;
 }
 
@@ -159,7 +159,7 @@ int main()
 
 char* my_strcat(char* dest, const char* sce)
 {
-  assert(dest && sce);
+	assert(dest && sce);
 	char* ret = dest;
 	while (*dest) //找到目标字符串中\0的位置
 	{
@@ -306,4 +306,3 @@ int main()
 	}
 	return 0;
 }
-
