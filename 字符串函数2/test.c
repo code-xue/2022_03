@@ -27,6 +27,7 @@ char* my_strstr(const char* str1, const char* str2)
 		{
 			return cp;
 		}
+		cp++;
 	}
 	return NULL;
 
@@ -40,7 +41,7 @@ int main()
 	char* ret = my_strstr(arr1, arr2);
 	if (ret != NULL)
 	{
-		printf("%s\n", arr1);
+		printf("%s\n", ret);
 	}
 	else
 	{
@@ -48,10 +49,3 @@ int main()
 	}
 	return 0;
 }
-
-//int main()
-//{
-//	int a = 8;
-//	printf("%d\n", a);
-//	return 0;
-//}
