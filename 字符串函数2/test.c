@@ -92,3 +92,39 @@ int main()
 	pf = NULL;
 	return 0;
 }
+
+//也可使用perror函数直接输出错误信息
+//不需要再创建errno变量
+//还可以自定义添加想要输出的内容
+
+int main()
+{
+	FILE* pf = fopen("test.txt","r");
+	if (pf == NULL)
+	{
+		perror("");
+		return 1;
+	}
+	fclose(pf);
+	pf = NULL;
+	return 0;
+}
+
+//*******************************************************************************
+//字符分类函数：
+//iscntrl  任何控制字符
+//isspace  空白字符
+//isdigit  十进制数字0-9
+//isxdigit 十六进制数字
+//islower  小写字符
+//isupper  大写字符
+//isalpha  字母A-Z和a-z
+//isalnum  字母或数字
+//ispunct  标点符号
+//isgraph  任何图形字符
+//isprint  任何可打印字符
+
+//**********************************************************************************
+//字符转换函数
+//tolower  大写转小写
+//toupper  小写转大写
