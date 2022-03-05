@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "内存函数", "内存函�
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "自定义类型", "自定义类型\自定义类型.vcxproj", "{F5206FCA-7E79-481D-B91C-542FA8E85F76}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "通讯录", "通讯录\通讯录.vcxproj", "{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{F5206FCA-7E79-481D-B91C-542FA8E85F76}.Release|x64.Build.0 = Release|x64
 		{F5206FCA-7E79-481D-B91C-542FA8E85F76}.Release|x86.ActiveCfg = Release|Win32
 		{F5206FCA-7E79-481D-B91C-542FA8E85F76}.Release|x86.Build.0 = Release|Win32
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Debug|x64.ActiveCfg = Debug|x64
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Debug|x64.Build.0 = Debug|x64
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Debug|x86.ActiveCfg = Debug|Win32
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Debug|x86.Build.0 = Debug|Win32
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Release|x64.ActiveCfg = Release|x64
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Release|x64.Build.0 = Release|x64
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Release|x86.ActiveCfg = Release|Win32
+		{CDEDB3B2-0D9E-420E-B056-CFAF4F65889D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
