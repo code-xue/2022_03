@@ -44,6 +44,7 @@ int main()
 			PintfContact(&con);
 			break;
 		case EXIT:
+			DestoryContact(&con);
 			printf("�˳�ͨѶ¼\n");
 			break;
 		default:

@@ -4,17 +4,33 @@
 //初始化通讯录
 void InitContact(Contact* pc)
 {
+	pc->data = (PeoInfo*)malloc(DEFAULT_SZ * sizeof(PeoInfo));
 	pc->sz = 0;
-	memset(pc->data, 0, sizeof(pc->data));
+	pc->capacity = DEFAULT_SZ;
+}
+
+//销毁通讯录
+void DestoryContact(Contact* pc)
+{
+	free(pc->data);
+	pc->data = NULL;
+	pc->sz = 0;
+	pc->capacity = 0;
 }
 
 //添加联系人
 void AddContact(Contact* pc)
 {
-	if (pc->sz == MAX)
+	if (pc->sz == pc->capacity)
 	{
-		printf("联系人已满，无法添加\n");
-		return;
+		//通讯录增容
+		PeoInfo* ptr = (PeoInfo*)realloc((void*)pc->data, (pc->capacity + INC_SZ) * sizeof(PeoInfo));
+		if (ptr != NULL)
+		{
+			pc->data = ptr;
+			pc->capacity += INC_SZ;
+			printf("增容成功\n");
+		}
 	}
 	scanf("%s", pc->data[pc->sz].name);
 	scanf("%s", pc->data[pc->sz].tel);

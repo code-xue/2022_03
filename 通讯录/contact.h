@@ -4,7 +4,8 @@
 #include<string.h>
 #include<stdlib.h>
 
-#define MAX 1000 //最大可存储联系人的数量
+#define DEFAULT_SZ 3 //默认可存储联系人数量
+#define INC_SZ 2     //每次增容增加的联系人数量
 
 enum menu
 {
@@ -30,8 +31,9 @@ typedef struct PeoInfo
 //通讯录数据
 typedef struct Contact
 {
-	PeoInfo data[MAX];
+	PeoInfo* data;
 	int sz;
+	int capacity; 
 }Contact;
 
 
@@ -42,3 +44,4 @@ void SearchContact(Contact* pc);
 void DeleteContact(Contact* pc);
 void ModifyContact(Contact* pc);
 void SortContactByName(Contact* pc);
+void DestoryContact(Contact* pc);
