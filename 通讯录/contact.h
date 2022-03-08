@@ -45,3 +45,6 @@ void DeleteContact(Contact* pc);
 void ModifyContact(Contact* pc);
 void SortContactByName(Contact* pc);
 void DestoryContact(Contact* pc);
+void SaveContact(Contact* pc);
+void LoadContact(Contact* pc);
+void CheckCapacity(Contact* pc);

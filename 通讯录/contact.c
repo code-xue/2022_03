@@ -1,12 +1,77 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include"contact.h"
 
+void CheckCapacity(Contact* pc)
+{
+	if (pc->sz == pc->capacity)
+	{
+		//通讯录增容
+		PeoInfo* ptr = (PeoInfo*)realloc((void*)pc->data, (pc->capacity + INC_SZ) * sizeof(PeoInfo));
+		if (ptr != NULL)
+		{
+			pc->data = ptr;
+			pc->capacity += INC_SZ;
+			printf("增容成功\n");
+		}
+	}
+}
+
+void LoadContact(Contact* pc)
+{
+	FILE* pf = fopen("contact.dat", "r");
+	if (pf == NULL)
+	{
+		perror("LoadContact");
+		return;
+	}
+
+	//读取数据
+	PeoInfo tmp = { 0 };
+	while (fread(&tmp, sizeof(PeoInfo), 1, pf))
+	{
+		//是否增容
+		CheckCapacity(pc);
+		pc->data[pc->sz] = tmp;
+		pc->sz++;
+	}
+	printf("读取完成\n");
+
+	fclose(pf);
+	pf = NULL;
+}
+
 //初始化通讯录
 void InitContact(Contact* pc)
 {
 	pc->data = (PeoInfo*)malloc(DEFAULT_SZ * sizeof(PeoInfo));
+	if (pc->data == NULL)
+	{
+		perror("InitContact");
+		return;
+	}
 	pc->sz = 0;
 	pc->capacity = DEFAULT_SZ;
+	LoadContact(pc);
+}
+
+//保存通讯录
+void SaveContact(Contact* pc)
+{
+	FILE* pf = fopen("contact.dat", "w");
+	if (pf == NULL)
+	{
+		perror("SaveContact");
+		return;
+	}
+
+	int i = 0;
+	for (i = 0; i < pc->sz; i++)
+	{
+		fwrite(pc->data + i, sizeof(PeoInfo), 1, pf);
+	}
+
+	fclose(pf);
+	pf = NULL;
 }
 
 //销毁通讯录
@@ -21,17 +86,7 @@ void DestoryContact(Contact* pc)
 //添加联系人
 void AddContact(Contact* pc)
 {
-	if (pc->sz == pc->capacity)
-	{
-		//通讯录增容
-		PeoInfo* ptr = (PeoInfo*)realloc((void*)pc->data, (pc->capacity + INC_SZ) * sizeof(PeoInfo));
-		if (ptr != NULL)
-		{
-			pc->data = ptr;
-			pc->capacity += INC_SZ;
-			printf("增容成功\n");
-		}
-	}
+	CheckCapacity(pc);
 	scanf("%s", pc->data[pc->sz].name);
 	scanf("%s", pc->data[pc->sz].tel);
 	scanf("%d", &pc->data[pc->sz].age);
