@@ -29,6 +29,7 @@ int main()
 	return 0;
 }
 
+//*************************************************************************
 //2.文件的顺序写入
 //fgetc:字符输入函数
 //fputc:字符输出函数
@@ -127,3 +128,107 @@ int main()
 	pf = NULL;
 	return 0;
 }
+
+//scanf:针对标准输入的格式化的输入语句，stdin,键盘输入
+//fscanf:针对所有输入流的格式化的输入语句，stdio和文件
+//sscanf:从一个字符串中读取一个格式化的数据
+
+//printf:针对标准输出的格式化的输出语句，stdout,打印在屏幕上
+//fprintf:针对全部输出流的格式化的输出语句，stdout,打印在屏幕上
+//sprintf:把一个格式化的数据，转化成字符串
+
+
+//***********************************************************************************
+//文件随机读写
+//fseek函数：根据文件指针的位置和偏移量来定位文件指针
+//int fseek ( FILE * stream, long int offset, int origin );
+//origin的位置有三种：
+//1.SEEK_CUR:文件指针的当前位置
+//2.SEEK_END:文件的末尾（\0的地址）
+//3.SEEK_SET:文件的起始位置
+
+
+int main()
+{
+	//假设文件中字符为abcde
+	FILE* pf = fopen("test.dat", "r");
+	if (pf == NULL)
+	{
+		perror("fopen");
+		return 1;
+	}
+
+	int ch = fgetc(pf);
+	printf("%c\n", ch); //a
+
+	fseek(pf, -1, SEEK_CUR);
+	ch = fgetc(pf);
+	printf("%c\n", ch); //a
+
+	fseek(pf, 2, SEEK_SET);
+	ch = fgetc(pf);
+	printf("%c\n", ch);//c
+
+	fseek(pf, -3, SEEK_END);
+	ch = fgetc(pf);
+	printf("%c\n", ch);//c
+
+	fclose(pf);
+	pf = NULL;
+	return 0;
+}
+
+
+//*********************************************************************
+//文件读取结束的判定
+//ferror函数：文件读取失败时返回非0值
+//feof函数：文件读取正常结束时返回非0值
+
+int main()
+{
+	FILE* pfread = fopen("test.dat", "r");
+	if (pfread == NULL)
+	{
+		perror("pfread");
+		return 1;
+	}
+	FILE* pfwrite = fopen("test2.dat", "w");
+	if (pfwrite == NULL)
+	{
+		//关闭test.dat文件
+		fclose(pfread);
+		pfread = NULL;
+		perror("pfwrite");
+		return 1;
+	}
+
+	int ch = 0;
+	//fgetc读取到文本最后时返回EOF
+	while (ch = fgetc(pfread) != EOF)
+	{
+		fputc(ch, pfwrite);
+	}
+
+	//判断读取文件因为什么原因结束
+	if (ferror(pfread))
+	{
+		printf("文件读取出错\n");
+	}
+	if (feof(pfread))
+	{
+		printf("文件正常读取结束\n");
+	}
+
+	fclose(pfread);
+	pfread = NULL;
+	fclose(pfwrite);
+	pfwrite = NULL;
+	return 0;
+}
+
+
+//****************************************************************************
+//文件缓冲区：ANSIC标准采用“缓冲文件系统”处理数据文件，从内存向磁盘输出数据会先送到内存中的缓冲区，
+//装满缓冲区后才一起送到磁盘上，如果从磁盘向计算机读入数据，
+//则从磁盘文件中读取数据输入到内存缓冲区（充满缓冲区），
+//然后再从缓冲区逐个地将数据送到程序数据区（程序变量等）
